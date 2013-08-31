@@ -93,11 +93,14 @@ the current line."
     (evil-range (first range) (second range) 'line)))
 
 ;;;###autoload
-(define-key evil-inner-text-objects-map "i" 'evil-indent-i-indent)
-;;;###autoload
-(define-key evil-outer-text-objects-map "i" 'evil-indent-a-indent)
-;;;###autoload
-(define-key evil-outer-text-objects-map "I" 'evil-indent-a-indent-lines)
+(eval-after-load 'evil
+  '(progn
+     (autoload 'evil-indent-i-indent "evil-indent-textobject" nil t)
+     (autoload 'evil-indent-a-indent "evil-indent-textobject" nil t)
+     (autoload 'evil-indent-a-indent-lines "evil-indent-textobject" nil t)
+     (define-key evil-inner-text-objects-map "i" 'evil-indent-i-indent)
+     (define-key evil-outer-text-objects-map "i" 'evil-indent-a-indent)
+     (define-key evil-outer-text-objects-map "I" 'evil-indent-a-indent-lines)))
 
 (provide 'evil-indent-textobject)
 ;;; evil-indent-textobject.el ends here
