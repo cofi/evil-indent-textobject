@@ -59,6 +59,31 @@ end of the block surrounding point."
                  (forward-line 1)))
       (list begin end))))
 
+(evil-define-text-object evil-indent-a-indent (&optional count beg end type)
+  "Text object describing the block with the same indentation as
+the current line and the line above."
+  :type line
+  (let ((range (evil-indent--same-indent-range)))
+    (evil-range (save-excursion
+                  (goto-char (first (evil-indent--same-indent-range)))
+                  (forward-line -1)
+                  (point-at-bol))
+                (second range) 'line)))
+
+(evil-define-text-object evil-indent-a-indent-lines (&optional count beg end type)
+  "Text object describing the block with the same indentation as
+the current line and the lines above and below."
+  :type line
+  (let ((range (evil-indent--same-indent-range)))
+    (evil-range (save-excursion
+                  (goto-char (first range))
+                  (forward-line -1)
+                  (point-at-bol))
+                (save-excursion
+                  (goto-char (second range))
+                  (forward-line 1)
+                  (point-at-eol)) 'line)))
+
 (evil-define-text-object evil-indent-i-indent (&optional count beg end type)
   "Text object describing the block with the same indentation as
 the current line."
