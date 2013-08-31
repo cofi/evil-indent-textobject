@@ -49,12 +49,14 @@ end of the block surrounding point."
     (let ((start (point))
           (indent (evil-indent--current-indentation))
           begin end)
-      (loop while (string= (evil-indent--current-indentation) indent)
+      (loop while (and (/= (point) (point-min))
+                       (string= (evil-indent--current-indentation) indent))
             do (progn
                  (setq begin (point-at-bol))
                  (forward-line -1)))
       (goto-char start)
-      (loop while (string= (evil-indent--current-indentation) indent)
+      (loop while (and (/= (point) (point-max))
+                       (string= (evil-indent--current-indentation) indent))
             do (progn
                  (setq end (point-at-eol))
                  (forward-line 1)))
