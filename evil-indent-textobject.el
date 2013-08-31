@@ -3,9 +3,10 @@
 ;; Copyright (C) 2013 Michael Markert
 ;; Author: Michael Markert <markert.michael@gmail.com>
 ;; Created: 2013-08-31
-;; Version:
+;; Version: 0.1
 ;; Keywords: convenience evil
 ;; URL: http://github.com/cofi/evil-indent-textobject
+;; Package-Requires: ((evil "0"))
 ;;
 ;; This file is not part of GNU Emacs.
 
